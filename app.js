@@ -6,7 +6,12 @@ const app = express();
 const host = "localhost";
 const port = "2024";
 
-app.get("/", (res, req) => {});
+// app.headers("Content-type", "text/plain");
+
+app.get("/", (req, res) => {
+  res.setHeader("Context-type", "text/plain");
+  res.send("Hello from dark side");
+});
 
 app.listen(port, host, () => {
   console.log(`Server running on http://${host}:${port}`);
