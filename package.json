@@ -7,5 +7,9 @@
     "app": "node app"
   },
   "author": "DC",
-  "license": "ISC"
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }

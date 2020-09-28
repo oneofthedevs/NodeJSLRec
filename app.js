@@ -1,4 +1,8 @@
+// Add type: "module" in package.json to use ES6 syntex
+//import { createServer } from "http";
+
 const http = require("http");
+const express = require("express");
 const host = "localhost";
 const port = "2024";
 
