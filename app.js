@@ -1,23 +1,30 @@
 // Add type: "module" in package.json to use ES6 syntex
 //import { createServer } from "http";
 
-//* All imports
+// All imports
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const SSE = require("express-sse");
-//* Port and Host
+// Port and Host
 const host = "localhost";
 const port = "2024";
 
-//* All app.use
+// All app.use
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//* New global objects
+// New global objects
 const sse = new SSE();
 
-//* API endpoints
+// Middleware
+const logger = (req, res, next) => {
+  console.log("Logged");
+  next();
+};
+
+app.use(logger);
+// API endpoints
 app.get("/api-call-update", sse.init);
 
 app.get("/api-one", (req, res) => {
@@ -71,6 +78,26 @@ app.get("/contactme", (req, res) => {
   res.send("Contact from dark side");
 });
 
+// handles 404 error
+app.use((err, req, res, next) => {
+  if (err.httpStatusCode === 404) {
+    res.status(404).send("Not Found");
+  }
+  next(err);
+});
+
+app.use((err, req, res, next) => {
+  if (err.httpStatusCode === 201) {
+    res.status(201).send("Not Authoraised");
+  }
+  next(err);
+});
+
+// Catch All
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(err.httpStatusCode || 500).send("Some Error you have");
+});
 //* Server Listen
 app.listen(port, host, () => {
   console.log(`Server running on http://${host}:${port}`);
