@@ -2,7 +2,7 @@
 const redis = require("redis");
 
 // const app = express();
-const subscriber = redis.createClient();
+const subscriber = redis.createClient(process.env.REDIS_URL);
 
 subscriber.on("message", (channel, message) => {
   console.log(`Message: ${message}, Channel: ${channel}`);

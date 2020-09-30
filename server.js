@@ -1,24 +1,31 @@
-const express = require("express");
+// const express = require("express");
 const redis = require("redis");
 
-const app = express();
-const publisher = redis.createClient();
+// const app = express();
+const publisher = redis.createClient(5678);
 
-app.get("/", (req, res) => {
-  return res.send("Hello from Dark side");
+const user = {
+  id: Math.floor(Math.random() * 1000),
+  name: "Obi-Wan",
+};
+publisher.publish("user-notify", JSON.stringify(user), () => {
+  process.exit(0);
 });
+// app.get("/", (req, res) => {
+//   return res.send("Hello from Dark side");
+// });
 
-app.get("/publish", (req, res) => {
-  const user = {
-    id: Math.floor(Math.random() * 1000),
-    name: "Obi-Wan",
-  };
-  let publisher = redis.createClient();
-  publisher.publish("user-notify", JSON.stringify(user), () => {
-    process.exit(0);
-  });
-  return res.send("Message Published");
-});
+// app.get("/publish", (req, res) => {
+//   const user = {
+//     id: Math.floor(Math.random() * 1000),
+//     name: "Obi-Wan",
+//   };
+//   // let publisher = redis.createClient();
+//   publisher.publish("user-notify", JSON.stringify(user), () => {
+//     process.exit(0);
+//   });
+//   return res.send("Message Published");
+// });
 
 // app.get("/", (req, res) => {
 //   const user = {
