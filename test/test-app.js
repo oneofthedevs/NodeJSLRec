@@ -21,6 +21,7 @@ describe("Web Pages test cases", () => {
         done();
       });
     });
+
     it("Main page Check", (done) => {
       request("http://localhost:2024", (error, res, body) => {
         expect(res.statusCode).to.equal(200);
@@ -35,6 +36,7 @@ describe("Web Pages test cases", () => {
         done();
       });
     });
+
     it("Contact page Check", (done) => {
       request("http://localhost:2024/contactme", (error, res, body) => {
         expect(res.statusCode).to.equal(200);
@@ -42,6 +44,7 @@ describe("Web Pages test cases", () => {
       });
     });
   });
+
   it("About page constent", (done) => {
     request("http://localhost:2024/about", (error, res, body) => {
       expect(body).to.equal("About from dark side");
