@@ -17,6 +17,7 @@ describe("Calculator", () => {
   describe("Division", () => {
     it("1 / 1 === 1", () => {
       expect(calculator.divi(1, 1)).to.equal(1);
+      expect(calculator.divi(1, 0)).to.equal(undefined);
     });
   });
   describe("Multiplication", () => {
