@@ -1,5 +1,5 @@
-// Add type: "module" in package.json to use ES6 syntex
-//import { createServer } from "http";
+// !Add type: "module" in package.json to use ES6 syntex
+// import { createServer } from "http";
 
 const http = require("http");
 const host = "localhost";
